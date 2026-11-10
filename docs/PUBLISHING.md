@@ -43,19 +43,22 @@ dshmarket / plugin-console              ← 用户在商店里搜到 → 一键�
 | `icon:` 字段 | 市场卡片图标只认 **GitHub 托管的 png/jpg/webp**，SVG 会被拒——现在只有 `icon.svg`，需要另导一张 PNG |
 | GitHub Release tarball | 不发 npm 时的替代：`tarball:` 指向 `releases/latest/download/<名字>.tgz`，资产名**不要带版本号** |
 
-## 二、本机现状盘点（2026-11-09）
+## 二、现状盘点（2026-11-10 更新：已发布）
 
 | 项 | 状态 |
 |---|---|
-| 本地 git 仓库 | ✅ 有，`master` 分支，11 个提交 |
-| 远程仓库 | ❌ 没有 `origin`，从未推送 |
-| 版本 / 测试 | `0.2.3`；`npm run check` 通过，`node --test` 43 项全通过 |
-| 打包 | `npm pack` 7 个文件、19.8 kB（`lib` / `cordis.patch.yml` / `icon.svg` / `README.md` / `LICENSE` / `package.json`） |
+| 远程仓库 | ✅ [`hzzzcyn/dsh-agent-desk`](https://github.com/hzzzcyn/dsh-agent-desk)，public，默认分支 `main` |
+| 已发布内容 | 16 个文本文件，`main` 上单一根提交 `9825c41`（历史压缩，旧提交里的内部称呼不入公开历史） |
+| topic | ✅ `dsh-plugin`、`dsh`、`plugin`、`agents` |
+| 版本 / 测试 | 发布版 `0.2.3`；`npm run check` 通过，`node --test` 43 项全通过 |
+| 打包 | `npm pack` 7 个文件、22.9 kB（`lib` / `cordis.patch.yml` / `icon.svg` / `README.md` / `LICENSE` / `package.json`） |
 | 依赖 | 零运行时依赖、无构建步骤 |
-| 包名可用性 | `dsh-agent-desk` 可用 |
-| 图标 | 只有 `icon.svg`（880 B），缺市场要求的位图 |
-| 截图 | 无 |
-| 未入库的杂物 | `dist/`（含 110 KB 状态快照与本机安装日志）、`*.bak-20261109-*`、`docs/ROLLBACK.txt`（本机回退说明，含本机路径）、`test-run.log` |
+| `repository` 元数据 | ✅ `package.json` 已指向远程仓库（npm 包与列表条目靠它关联） |
+| 包名可用性 | `dsh-agent-desk` 可用（npm 尚未发布） |
+| 图标 | `icon.svg` 已入库；市场字段只收 GitHub 托管的位图（png/jpg/webp），**待补一张 PNG** |
+| 截图 | 无（可选，1–8 张 PNG，配合 `screenshots.json`） |
+| 收录门槛 | 仓库创建于 `2026-11-09T10:46:57Z`，满 24 小时（= 2026-11-10 18:47 +08）后才可提 PR |
+| 未入库的杂物 | 已全部 gitignore：`dist/`、`*.bak-*`、`docs/ROLLBACK.txt`、`*.log`、`*.tgz` |
 | 真实委派实测 | ⬜ 待重启 DSH 后新建会话验证 |
 
 ## 三、需要你拍板 / 亲自做的

@@ -49,5 +49,13 @@
     "dashboard"
   ],
   "license": "MIT",
-  "author": "hzzzcyn"
+  "author": "hzzzcyn",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzzzcyn/dsh-agent-desk.git"
+  },
+  "homepage": "https://github.com/hzzzcyn/dsh-agent-desk#readme",
+  "bugs": {
+    "url": "https://github.com/hzzzcyn/dsh-agent-desk/issues"
+  }
 }
