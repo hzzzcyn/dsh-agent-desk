@@ -1,0 +1,6 @@
+url: https://github.com/hzzzcyn/dsh-agent-desk
+name: hzzzcyn/dsh-agent-desk
+category: ui
+description:
+  en: 'Groups recent sessions by agent preset in a sidebar page, with running and awaiting-confirmation counts plus rows for delegated sub-agent tasks, and adds a delegate_agent tool that hands a self-contained task to another registered preset and returns its final text once the caller has stated the target, the task and the acceptance criteria and obtained consent. Requires DSH 0.2.1-rc.1 up to 0.3.0; no runtime dependencies and no build step.'
+  zh: '在侧栏页按智能体预设归组最近 7 天的会话，显示运行中/等待确认数量与委派出的子任务行；另提供 delegate_agent 工具，在调用方说明目标、任务与验收标准并取得同意后，把自包含任务交给另一个已注册预设并前台取回最终文本。要求 DSH 0.2.1-rc.1 至 0.3.0；零运行时依赖、无构建步骤。'

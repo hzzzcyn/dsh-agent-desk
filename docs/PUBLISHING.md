@@ -55,24 +55,30 @@ dshmarket / plugin-console              ← 用户在商店里搜到 → 一键�
 | 依赖 | 零运行时依赖、无构建步骤 |
 | `repository` 元数据 | ✅ `package.json` 已指向远程仓库（npm 包与列表条目靠它关联） |
 | 包名可用性 | `dsh-agent-desk` 可用（npm 尚未发布） |
-| 图标 | `icon.svg` 已入库；市场字段只收 GitHub 托管的位图（png/jpg/webp），**待补一张 PNG** |
+| 图标 | ✅ `icon.svg` + `icon.png`（512×512，GitHub 托管，市场卡片可直接引用） |
 | 截图 | 无（可选，1–8 张 PNG，配合 `screenshots.json`） |
-| 收录门槛 | 仓库创建于 `2026-11-09T10:46:57Z`，满 24 小时（= 2026-11-10 18:47 +08）后才可提 PR |
+| 收录条目 | ✅ 定稿草稿在 [`docs/awesome-entry.yml`](awesome-entry.yml)，分类 `ui` |
+| 收录门槛 | 仓库创建于 `2026-11-09T10:46:57Z`，满 24 小时（= 2026-11-10 18:47 +08）后才可提 PR（CI 自动卡） |
+| fork | ✅ `hzzzcyn/awesome-dsh-plugin` 已 fork，PR 分支待建 |
 | 未入库的杂物 | 已全部 gitignore：`dist/`、`*.bak-*`、`docs/ROLLBACK.txt`、`*.log`、`*.tgz` |
 | 真实委派实测 | ⬜ 待重启 DSH 后新建会话验证 |
 
-## 三、需要你拍板 / 亲自做的
+## 三、已定的选择
 
-1. **GitHub 账号与仓库归属**：放个人账号还是组织？仓库名用 `dsh-agent-desk` 还是改名（见第四节）？
-2. **`gh` CLI 没装**：要么装 GitHub CLI（`winget install GitHub.cli`，之后 `gh auth login`），
-   要么走网页建仓 + `git remote add`。两条路我都能给命令，但登录/授权必须你自己做。
-3. **LICENSE 署名**：现在写的是 `Copyright (c) 2026 dsh-agent-desk contributors`，
-   要不要改成你的名字或 ID？
-4. **是否发 npm**：发的话需要 npm 账号 + token；注意本机 npm 走公司内网镜像，
-   发布要显式 `--registry https://registry.npmjs.org --access public`，且公司网络可能拦。
-5. **截图**：侧栏入口、智能体页、一次委派的结果，2–3 张即可（1–8 张、PNG）。
-   我读不了图，只能替你检查尺寸/路径与放置，画面是否满意要你自己看。
-6. **是否现在建仓**：仓库要满 1 天才够收录门槛，越早建越早能提 PR。
+| 事项 | 结论 |
+|---|---|
+| 仓库归属 | 个人账号 `hzzzcyn`，仓库名保持 `dsh-agent-desk`（不改名） |
+| 署名 | LICENSE 与 `package.json` 的 `author` 均为 `hzzzcyn` |
+| 公开范围 | public，历史压缩为单一根提交，旧提交里的内部称呼不进公开历史 |
+| 发布方式 | 走 GitHub API（本机 `gh` CLI 未装，且 `github.com:443` 被网络拦截，`api.github.com` 可用） |
+| npm | **暂缓**：本机 npm 走公司内网镜像，发布要显式 `--registry https://registry.npmjs.org --access public`，且需 npm token |
+| 截图 | 未做（可选）；需要真实运行的 DSH 界面截图，无法凭空生成 |
+
+## 三之二、还需要出手的事
+
+1. **收录 PR 的最终提交**：CI 卡「仓库满 1 天」，到点后可以直接把 fork 分支和 PR 建好；
+   若 token 没有对上游仓库的 PR 权限，就由你点一次 GitHub 的「Create pull request」。
+2. **截图**（可选）：侧栏入口、智能体页、一次委派的结果，2–3 张 PNG 即可。
 
 ## 四、同名与同类风险（值得先想清楚）
 
@@ -93,7 +99,7 @@ dshmarket / plugin-console              ← 用户在商店里搜到 → 一键�
 ### A1. 清理不该入库的东西
 
 已写进 `.gitignore`：`dist/`、`*.bak`、`*.bak-*`、`docs/ROLLBACK.txt`、`*.log`、`*.tgz`。
-`docs/ROLLBACK.txt` 是本机回退手册（含 `C:\Users\...` 路径），**保留在本地但不入库**；
+`docs/ROLLBACK.txt` 是本机回退手册（含本机用户目录路径），**保留在本地但不入库**；
 要不要从磁盘删掉，等你确认。
 
 ### A2. 建仓并推送
@@ -134,30 +140,25 @@ gh repo edit <owner>/dsh-agent-desk --add-topic dsh-plugin
 
 ### B. 提收录 PR
 
-1. fork `awesome-dsh-plugin/awesome-dsh-plugin`；
-2. 新增 `data/plugins/<owner>__dsh-agent-desk.yml`：
+前置：仓库已 fork 到 `hzzzcyn/awesome-dsh-plugin`；条目内容以 [`docs/awesome-entry.yml`](awesome-entry.yml) 为准
+（改描述只改这个文件，PR 前再原样复制到 fork 的 `data/plugins/hzzzcyn__dsh-agent-desk.yml`）。
 
-```yaml
-url: https://github.com/<owner>/dsh-agent-desk
-name: <owner>/dsh-agent-desk
-category: tools
-description:
-  en: 'Groups recent sessions by custom agent preset in a sidebar page, showing running and awaiting-confirmation counts plus delegated sub-agent rows, and adds a delegate_agent tool that hands a self-contained task to another registered preset and returns its final text after the caller explains the target, task and acceptance criteria and gets consent. Requires DSH 0.2.1-rc.1 or newer; no runtime dependencies and no build step.'
-  zh: '在侧栏页按自定义 agent 预设归组最近 7 天的会话，显示运行中/等待确认数量与委派出的子任务行；另提供 delegate_agent 工具，在调用方先说明目标、任务与验收标准并取得同意后，把自包含任务交给另一个已注册预设并前台取回其最终文本。要求 DSH 0.2.1-rc.1 及以上；零运行时依赖、无构建步骤。'
-```
+1. 在 fork 上基于上游 `main` 建分支 `add-hzzzcyn-dsh-agent-desk`，只加上面那一个文件；
+2. 开 PR 到 `awesome-dsh-plugin/awesome-dsh-plugin:main`，正文写清：
+   - 插件做什么、怎么装（`dsh plugin add github:hzzzcyn/dsh-agent-desk`）；
+   - 验证证据：`node --test` 43 项通过、`npm run check` / `npm pack` 通过、装机后实测步骤；
+   - 与近名插件的差异（见第四节），避免评审误判重复。
+3. CI 会查条目数、`dsh.bundle`、仓库年龄、`awesome-lint`；失败会指到具体行，同分支推修复即可。
 
-3. 开 PR，正文写清：做了什么、装法、验证证据（测试 43 项、装机后实测步骤）；
-4. CI 会查条目数、`dsh.bundle`、仓库年龄、`awesome-lint`；失败会指到具体行，同分支推修复即可。
-
-> 分类先填 `tools`（工具与能力）。同类多智能体插件有归 `agi` 的，但本插件主体是工具 + 会话视图；
-> 分类选偏了维护者会直接改，不会因此打回。
+> 分类填 `ui`：主体是侧栏页面，另加两个工具；同类里 `dsh-agent-status` 归 `ui`，
+> 任务板类 `dsh-agent-board` 归 `workflow`。分类选偏了维护者会直接改，不会因此打回。
 
 ## 六、发布前自检清单
 
 - [ ] `npm run check` 通过（files 声明齐全）
 - [ ] `npm test` 43 项通过（或用 `test:no-isolation`）
 - [ ] `npm pack --dry-run` 里没有本机文件、没有 `docs/ROLLBACK.txt`
-- [ ] 仓库里没有 `C:\Users\...` 之类本机路径（已核查：tracked 文件 0 处）
+- [ ] 仓库里没有本机用户目录之类的绝对路径（已核查：tracked 文件 0 处）
 - [ ] 仓库公开、加了 `dsh-plugin` topic、创建满 1 天
 - [ ] `package.json` 的 `repository` 指回该仓库
 - [ ] 真实装一次 `dsh plugin add`，重启后新建会话能看到「智能体」页与两个工具
