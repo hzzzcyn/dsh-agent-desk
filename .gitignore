@@ -1,0 +1,13 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+*.tgz
+
+# 本机安装/回退辅助产物：含本机路径与状态快照，不入库
+dist/
+*.bak
+*.bak-*
+docs/ROLLBACK.txt
+scripts/sync-installed-copies.*
+scripts/install-and-upgrade.ps1

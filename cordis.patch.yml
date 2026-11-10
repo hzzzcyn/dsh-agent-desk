@@ -1,0 +1,5 @@
+# dsh-agent-desk bundle patch.
+# 只插入一行宿主插件；浏览器半通过 package.json 的 dsh.client 声明被发现。
+- insert:
+    - id: dsh-agent-desk
+      name: 'dsh-agent-desk'

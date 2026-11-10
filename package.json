@@ -1,0 +1,53 @@
+{
+  "name": "dsh-agent-desk",
+  "version": "0.2.3",
+  "description": "DeepSeek Harness 智能体值班台：侧栏查看每个预设 agent 的任务与状态，并在 agent 之间安全委派任务。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "icon": "icon.svg",
+  "scripts": {
+    "check": "node scripts/check-package-files.mjs && node --check lib/index.js && node --check lib/client.js",
+    "prepack": "node scripts/check-package-files.mjs",
+    "test": "node --test test/*.test.js",
+    "test:no-isolation": "node --test --experimental-test-isolation=none test/*.test.js"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-runtime"
+      ]
+    }
+  },
+  "engines": {
+    "node": ">=20",
+    "dsh": ">=0.2.1-rc.1 <0.3.0"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "agent",
+    "delegation",
+    "subagent",
+    "sidebar",
+    "dashboard"
+  ],
+  "license": "MIT",
+  "author": "hzzzcyn"
+}

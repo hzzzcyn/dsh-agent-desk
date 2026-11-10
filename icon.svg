@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="dsh-agent-desk">
+  <!-- Same geometry as the sidebar AgentDeskIcon in lib/client.js (16-unit grid), mapped to a 512 canvas. -->
+  <!-- The whole 16-unit frame is scaled to 0.72 of the canvas (368.64 px), matching the inset of the installed @noob-stupid/dsh-plugin-console icon so list rows look the same size. -->
+  <!-- Stroke color is explicit: "currentColor" has no context in a standalone file and would fall back to black. -->
+  <g transform="translate(256 256) scale(23.04) translate(-8 -8)" fill="none" stroke="#e6e8ef" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="6" cy="5" r="2.1"/>
+    <path d="M2.4 13.1c0-2.2 1.8-3.8 3.6-3.8s3.6 1.6 3.6 3.8"/>
+    <circle cx="12.2" cy="4.4" r="1.5"/>
+    <path d="M10.6 7.2c1.6.2 2.7 1.4 2.7 3"/>
+  </g>
+</svg>
